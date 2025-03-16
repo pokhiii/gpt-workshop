@@ -1,16 +1,21 @@
-# Given one word, predict the next word.
+import random
 
-# Sample text: The ones that love us never really leave us.
-word_pairs = {
-    "The": "ones",
-    "ones": "that",
-    "that": "love",
-    "love": "us",
-    "us": "never",
-    "never": "really",
-    "really": "leave",
-    "leave": "us."
-}
+# Sample text that the model will "learn" from
+sample_text = "The ones that love us never really leave us."
+
+words = sample_text.split()
+
+word_pairs = {}
+for i in range(len(words) - 1):
+    key = words[i]
+    next_word = words[i + 1]
+
+    if key not in word_pairs:
+        word_pairs[key] = []
+
+    word_pairs[key].append(next_word)
+
+print("Learned Word Pairs:", word_pairs)
 
 while True:
     # Ask the user to input a starting word
@@ -28,7 +33,10 @@ while True:
 
     # Generate words dynamically
     for _ in range(15):
-        next_word = word_pairs.get(current_word, "[END]")
+        next_words = word_pairs.get(current_word, ["[END]"])
+
+        next_word = random.choice(next_words)
+
         print(next_word, end=" ")
 
         # Stop if we've reached the end
