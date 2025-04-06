@@ -1,11 +1,16 @@
 import random
 
-# Sample text that the model will "learn" from
+# Training data: Sample text that the model will "learn" from
 sample_text = "The ones that love us never really leave us."
 
+
+# Tokenization
 words = sample_text.split()
 
+# Model
 word_pairs = {}
+
+# Training
 for i in range(len(words) - 1):
     key = words[i]
     next_word = words[i + 1]
@@ -35,6 +40,7 @@ while True:
     for _ in range(15):
         next_words = word_pairs.get(current_word, ["[END]"])
 
+        # Sampling
         next_word = random.choice(next_words)
 
         print(next_word, end=" ")
